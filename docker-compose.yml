@@ -1,0 +1,25 @@
+version: "3"
+services:
+  angular:
+    build: ./frontend
+    ports:
+      - "4200:4200"
+    depends_on:
+      - express
+    expose:
+      - "4200"
+
+  express:
+    build: ./backend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mediamtx
+    environment:
+      MEDIAMTX_HOST: mediamtx
+
+  mediamtx:
+    image: bluenviron/mediamtx:latest-ffmpeg
+    ports:
+      - "8554:8554"
+      - "8888:8888"
