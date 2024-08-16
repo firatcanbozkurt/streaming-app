@@ -1,0 +1,49 @@
+<!-- app.component.html -->
+<div>
+  <h1>Video Yükle ve Yayınla</h1>
+  <input type="file" accept=".mp4" (change)="onFileSelected($event)" />
+
+  <p-table [value]="videos" [tableStyle]="{ 'min-width': '50rem' }">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Video Adı</th>
+        <th>RTSP Adresi Mediamtx</th>
+        <th>HLS Adresi Mediamtx</th>
+        <th>HLS 2 Adresi Express</th>
+        <th>İşlemler</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-video>
+      <tr>
+        <td>{{ video.name }}</td>
+        <td>{{ video.rtspUrl }}</td>
+        <td>{{ video.hlsUrl }}</td>
+        <td>
+          {{ video.hls2Url }}
+        </td>
+        <td id="actionButtons">
+          <p-button
+            [disabled]="video.isShowAvailable"
+            (click)="startStream(video)"
+            severity="contrast"
+            label="Başlat"
+            size="small"
+          ></p-button>
+          <p-button
+            [disabled]="!video.isShowAvailable"
+            (click)="stopStream(video)"
+            severity="danger"
+            label="Durdur"
+            size="small"
+          ></p-button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+  <div *ngIf="isFileUploading" class="upload-popup">
+    <div class="upload-popup-content">
+      <div class="spinner"></div>
+      <p>Video yükleniyor, lütfen bekleyin...</p>
+    </div>
+  </div>
+</div>
