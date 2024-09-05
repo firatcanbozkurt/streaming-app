@@ -20,7 +20,7 @@
 The app uses the frontend for all interactions with the backend. Users can upload a .mp4 video to the server and see the streaming addresses for RTSP, HSL, and HSL 2(Express) on the UI. There are two buttons "Başlat" for startıng the stream and "Durdur" for stopping the stream.
 
 ### Backend (Express)
-The server accepts file uploads and renames them appropriately according to the Task PDf. For streaming purposes, Express creates a child process to efficiently manage processes by creating a separate process.
+The server accepts file uploads and renames them appropriately. For streaming purposes, Express creates a child process to efficiently manage processes by creating a separate process.
 FFmpeg is used for transcoding the video and it creates an .m3u8 file that consists of the name of the video chunks with the extension of .ts.
 
 The server also serves the HLS stream using an endpoint called `/videos/:id`. ID is the name of the video being streamed.
